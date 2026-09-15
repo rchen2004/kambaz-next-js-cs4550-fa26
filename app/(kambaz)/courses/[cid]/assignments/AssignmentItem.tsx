@@ -13,7 +13,7 @@ export default function AssignmentItem({
 }) {
   return (
     <li className="wd-assignment-list-item">
-          <Link href={'/course/${cid}/assignments/${aid}'} className='wd-assignment-link'>{title}</Link>
+          <Link href={`/courses/${cid}/assignments/${aid}`} className='wd-assignment-link'>{title}</Link>
           <p>{details}</p>
     </li>
   );
