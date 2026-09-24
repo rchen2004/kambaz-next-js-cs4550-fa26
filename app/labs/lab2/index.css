@@ -24,6 +24,20 @@ p#wd-id-selector-3 {
     color: rgb(189, 97, 97);
 }
 
+.wd-class-selector {
+  background-color: yellow;
+  color: blue;
+}
+.wd-ai-class-selector {
+  background-color: darkslateblue;
+  color: gold;
+}
+
+.wd-your-class {
+    background-color: rgb(255, 255, 149);
+    color: rgb(189, 255, 255);
+}
+
 h2 {
   background-color: navy;
   color: white;

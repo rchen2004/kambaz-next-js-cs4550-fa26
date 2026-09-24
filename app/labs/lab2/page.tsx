@@ -40,6 +40,31 @@ export default function Lab2() {
     unique look and feel.
     </p>
     </div>
+    <div id="wd-css-class-selectors">
+  <h3>Class selectors</h3>
+  <p className="wd-class-selector">
+    Instead of using IDs to refer to elements, you can use an
+    element&apos;s CLASS attribute
+  </p>
+  <h4 className="wd-class-selector">
+    This heading has same style as paragraph above
+  </h4>
+  <p className="wd-ai-class-selector">
+    A class can be reused on any number of elements, so this paragraph
+    and the heading below share one rule
+  </p>
+  <h4 className="wd-ai-class-selector">
+    This heading uses the same class as the paragraph above
+  </h4>
+    </div>
+    <div>
+        <h4 className="wd-your-class">
+        This heading has same style as paragraph below. You should create your own class and use it to style this heading.
+        </h4>
+        <p className="wd-your-class">
+        This paragraph has same style as heading above. You should create your own class and use it to style this paragraph.
+        </p>
+    </div>
     </div>
     
   );
