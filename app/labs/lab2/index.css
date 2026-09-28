@@ -1,9 +1,8 @@
-/*
+
 p {
   background-color: green;
   color: white;
 }
-*/
 
 p#wd-id-selector-1 {
   background-color: red;
@@ -64,4 +63,25 @@ h3 {
 .wd-selector-3 > .wd-my-selector {
     background-color: rgb(255, 0, 149);
     color: rgb(255, 255, 255);
+}
+
+/*
+This id rule on wd-id-selector-1 is the latest rule in the CSS file, so it will override the previous wd-id-selector-1 rule above. The background color will be black and the text color will be white.
+*/
+p#wd-id-selector-1 {
+  background-color: black;
+  color: white;
+}
+
+/*
+Three rules match p#wd-ai-cascade: the p tag rule at the top of this file
+(green), the class rule below (yellow), and the id rule below that (red).
+The id rule wins, so the background is red. Specificity decides this, not
+source order: the id rule would still win even if it came first.
+*/
+.wd-ai-cascade {
+  background-color: yellow;
+}
+p#wd-ai-cascade {
+  background-color: red;
 }

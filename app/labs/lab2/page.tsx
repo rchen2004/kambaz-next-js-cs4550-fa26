@@ -98,7 +98,16 @@ export default function Lab2() {
     </div>
   </div>
 </div>
+    <div id="wd-css-cascade">
+      <h3>Style precedence</h3>
+      <p id="wd-ai-cascade" className="wd-ai-cascade">
+        This paragraph is matched by a tag rule, a class rule, and an id
+        rule that all set a different background color. The id rule wins
+        because id selectors are more specific than class or tag
+        selectors.
+      </p>
     </div>
-    
+    </div>
+
   );
 }
