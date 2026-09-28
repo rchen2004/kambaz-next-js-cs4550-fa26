@@ -1,4 +1,5 @@
 import "./index.css";
+import ForegroundColor from "./ForegroundColor";
 
 export default function Lab2() {
   return (
@@ -107,7 +108,7 @@ export default function Lab2() {
         selectors.
       </p>
     </div>
+    <ForegroundColor />
     </div>
-
   );
 }
