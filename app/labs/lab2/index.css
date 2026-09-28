@@ -47,3 +47,21 @@ h3 {
     background-color: pink;
     color: aliceblue
 }
+
+.wd-selector-1 .wd-selector-3 {
+  background-color: red;
+  color: white;
+}
+.wd-selector-2 > .wd-selector-3 > .wd-selector-4 {
+  background-color: yellow;
+  color: blue;
+}
+.wd-selector-1 .wd-ai-selector-5 {
+  background-color: darkgreen;
+  color: white;
+}
+
+.wd-selector-3 > .wd-my-selector {
+    background-color: rgb(255, 0, 149);
+    color: rgb(255, 255, 255);
+}
