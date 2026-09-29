@@ -7,9 +7,12 @@ export default function BackgroundColors() {
         <span className="wd-bg-color-green wd-fg-color-white">
           the background of this text is green and the foreground white{" "}
         </span>
-        <span className="wd-bg-color-yellow wd-fg-color-black">
-            and the background of this text is yellow and the foreground black
-        </span>
+      </p>
+        <p className="wd-bg-color-blue wd-fg-color-white">
+            and the background of this text is blue and the foreground white
+        </p>
+      <p id="wd-ai-bg" className="wd-bg-color-yellow wd-fg-color-black">
+        This paragraph has a yellow background with black foreground text
       </p>
     </div>
   );
