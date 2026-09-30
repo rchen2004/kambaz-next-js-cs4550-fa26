@@ -278,9 +278,35 @@ p#wd-ai-cascade {
 .wd-pos-relative {
   position: relative;
 }
-
 .wd-ai-pos-relative-nudge {
   position: relative;
   top: 15px;
   right: 25px;
+}
+
+.wd-pos-absolute-10-10 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.wd-pos-absolute-50-50 {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+.wd-pos-absolute-120-20 {
+  position: absolute;
+  top: 20px;
+  left: 120px;
+}
+.wd-pos-absolute-10-150 {
+  position: absolute;
+  top: 150px;
+  left: 10px;
+}
+
+.wd-ai-pos-absolute-br {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
