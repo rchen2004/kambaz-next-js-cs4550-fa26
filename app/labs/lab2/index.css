@@ -37,6 +37,7 @@ p#wd-id-selector-3 {
     color: rgb(189, 255, 255);
 }
 
+/* 
 h2 {
   background-color: navy;
   color: white;
@@ -45,7 +46,7 @@ h2 {
 h3 {
     background-color: pink;
     color: aliceblue
-}
+} */
 
 .wd-selector-1 .wd-selector-3 {
   background-color: red;
@@ -364,3 +365,13 @@ img.wd-float-right {
 .wd-float-done {
   clear: both;
 }
+
+.wd-grid-row {
+  clear: both;
+}
+.wd-grid-col-half-page { width: 50%; float: left; }
+.wd-grid-col-third-page { width: 33%; float: left; }
+.wd-grid-col-two-thirds-page { width: 67%; float: left; }
+.wd-grid-col-left-sidebar { width: 20%; float: left; }
+.wd-grid-col-main-content { width: 60%; float: left; }
+.wd-grid-col-right-sidebar { width: 20%; float: left; }
