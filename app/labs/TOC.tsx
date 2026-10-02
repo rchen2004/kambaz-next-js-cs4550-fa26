@@ -32,7 +32,7 @@ export default function TOC() {
           </Link>
         </li>
         <li>
-          <Link id="wd-github" href="https://github.com/rchen2004/kambaz-next-js-cs4550-fa26" target="_blank" rel="noreferrer">GitHub Repository</Link>
+          <Link href="https://github.com/rchen2004/kambaz-next-js-cs4550-fa26" target="_blank" rel="noreferrer">GitHub Repository</Link>
         </li>
         <li>
           <Link href="/" id="wd-kambaz-link">Kambaz</Link>
