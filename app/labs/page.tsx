@@ -12,6 +12,9 @@ export default function Labs() {
         <li>
           <Link href="/labs/lab2">Lab 2: CSS Basics</Link>
         </li>
+          <li>
+          <Link href="/labs/lab2/tailwind" id="wd-lab2-tailwind-link">Lab 2: Tailwind CSS</Link>
+        </li>
         <li>
           <Link href="/labs/lab3">Lab 3: JavaScript Fundamentals</Link>
         </li>
