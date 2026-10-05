@@ -57,7 +57,7 @@ export default function KambazNavigation() {
       <Link
         href="/dashboard"
         id="wd-courses-link"
-        className={linkClass("/dashboard")}
+        className={linkClass("/courses")}
       >
         <FaBook className="inline-block text-3xl text-red-600" />
         <br />
