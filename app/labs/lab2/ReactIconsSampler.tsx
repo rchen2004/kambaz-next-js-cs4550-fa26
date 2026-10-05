@@ -5,7 +5,7 @@ import { VscAccount } from "react-icons/vsc";
 import { Gi3dGlasses, GiAbstract046 } from "react-icons/gi";
 import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlineCamera } from "react-icons/hi2";
-import "@/app/labs/lab2/tailwind/index.css";
+import "@/app/labs/lab2/tailwind/utilities.css";
 
 export default function ReactIconsSampler() {
   return (
