@@ -5,9 +5,18 @@ import { FaRegCircleUser, FaInbox, FaCircleQuestion } from "react-icons/fa6";
 import { FaBook, FaCalendar } from "react-icons/fa";
 import { ImLab } from "react-icons/im";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import "@/app/labs/lab2/tailwind/utilities.css";
 
 export default function KambazNavigation() {
+  const pathname = usePathname();
+  const linkClass = (path: string) =>
+    `block py-3 text-center text-sm no-underline ${
+      pathname.startsWith(path)
+        ? "bg-white text-red-600"
+        : "bg-black text-white"
+    }`;
+
   return (
     <nav
       id="wd-kambaz-navigation"
@@ -29,7 +38,7 @@ export default function KambazNavigation() {
       <Link
         href="/account"
         id="wd-account-link"
-        className="block bg-black py-3 text-center text-sm text-white no-underline"
+        className={linkClass("/account")}
       >
         <FaRegCircleUser className="inline-block text-3xl text-red-600" />
         <br />
@@ -38,7 +47,7 @@ export default function KambazNavigation() {
       <Link
         href="/dashboard"
         id="wd-dashboard-link"
-        className="block bg-black py-3 text-center text-sm text-white no-underline"
+        className={linkClass("/dashboard")}
       >
         <AiOutlineDashboard className="inline-block text-3xl text-red-600" />
         <br />
@@ -48,7 +57,7 @@ export default function KambazNavigation() {
       <Link
         href="/dashboard"
         id="wd-courses-link"
-        className="block bg-black py-3 text-center text-sm text-white no-underline"
+        className={linkClass("/dashboard")}
       >
         <FaBook className="inline-block text-3xl text-red-600" />
         <br />
@@ -57,7 +66,7 @@ export default function KambazNavigation() {
       <Link
         href="/calendar"
         id="wd-calendar-link"
-        className="block bg-black py-3 text-center text-sm text-white no-underline"
+        className={linkClass("/calendar")}
       >
         <FaCalendar className="inline-block text-3xl text-red-600" />
         <br />
@@ -66,7 +75,7 @@ export default function KambazNavigation() {
       <Link
         href="/inbox"
         id="wd-inbox-link"
-        className="block bg-black py-3 text-center text-sm text-white no-underline"
+        className={linkClass("/inbox")}
       >
         <FaInbox className="inline-block text-3xl text-red-600" />
         <br />
@@ -75,7 +84,7 @@ export default function KambazNavigation() {
       <Link
         href="/labs"
         id="wd-labs-link"
-        className="block bg-white py-3 text-center text-sm text-red-600 no-underline"
+        className={linkClass("/labs")}
       >
         <ImLab className="inline-block text-3xl text-red-600" />
         <br />
@@ -84,7 +93,7 @@ export default function KambazNavigation() {
       <Link
         href="/labs"
         id="wd-ai-nav-help"
-        className="block bg-black py-3 text-center text-sm text-white no-underline"
+        className={linkClass("/labs")}
       >
         <FaCircleQuestion className="inline-block text-3xl text-red-600" />
         <br />
