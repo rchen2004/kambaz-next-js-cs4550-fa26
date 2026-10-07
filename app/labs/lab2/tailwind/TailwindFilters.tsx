@@ -1,6 +1,6 @@
 export default function TailwindFilters() {
   // react.png is used here so the lab runs out of the box.
-  const src = "/images/react.png";
+  const src = "/images/react2.png";
   return (
     <div>
       <h2>Blurs</h2>
