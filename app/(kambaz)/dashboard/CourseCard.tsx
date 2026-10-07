@@ -10,7 +10,7 @@ export default function CourseCard({
   image: string;
 }) {
   return (
-    <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+    <div className="wd-dashboard-course w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
       <Link
         href={`/courses/${id}/home`}
         className="wd-dashboard-course-link block text-neutral-900 no-underline"
@@ -31,7 +31,7 @@ export default function CourseCard({
           </p>
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
+            className="inline-flex items-center w-full justify-center rounded bg-red-500 px-3 py-1.5 text-sm font-medium text-white"
           >
             Go
           </button>
