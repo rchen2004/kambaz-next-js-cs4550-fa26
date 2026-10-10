@@ -9,7 +9,7 @@ export default function BooleanVariables() {
   let true4 = numberVariable === 123;
   let true5 = floatingPointNumber !== 321.432;
   let false3 = numberVariable < 100;
-  let false4 = numberVariable === "123"; // using == instead of === would make this true, but we are using === which checks for type as well as value.
+  // let false4 = numberVariable === "123"; // using == instead of === would make this true, but we are using === which checks for type as well as value.
   const true6 = numberVariable !== 0;
   return (
     <div id="wd-boolean-variables">
@@ -29,8 +29,6 @@ export default function BooleanVariables() {
       true5 = {true5 + ""}
       <br />
       false3 = {false3 + ""}
-      <br />
-      false4 = {false4 + ""}
       <br />
       true6 = {true6 + ""}
       <hr />
