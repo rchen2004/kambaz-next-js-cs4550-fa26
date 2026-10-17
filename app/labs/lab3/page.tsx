@@ -31,6 +31,9 @@ import Classes from "./Classes";
 import Styles from "./Styles";
 import ClientComponentDemo from "./ClientComponentDemo";
 import ServerComponentDemo from "./ServerComponentDemo";
+import Add from "./Add";
+import Square from "./Square";
+import Highlight from "./Highlight";
 
 export default function Lab3() {
   console.log("Hello World!");
@@ -70,6 +73,18 @@ export default function Lab3() {
       <Styles />
       <ClientComponentDemo />
       <ServerComponentDemo />
+      <Add a={3} b={4} />
+      <Add a={10} b={20} />
+      <h4> Square of 4 </h4>
+      <Square>4</Square>
+      <h4> Square of 9 </h4>
+      <Square>9</Square>
+      <hr />
+      <Highlight> This is a highlighted sentence. </Highlight>
+      <br />
+      <Highlight>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </Highlight>
     </div>
   );
 }
