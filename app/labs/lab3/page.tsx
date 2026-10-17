@@ -34,6 +34,7 @@ import ServerComponentDemo from "./ServerComponentDemo";
 import Add from "./Add";
 import Square from "./Square";
 import Highlight from "./Highlight";
+import PathParameters from "./PathParameters";
 
 export default function Lab3() {
   console.log("Hello World!");
@@ -85,6 +86,7 @@ export default function Lab3() {
       <Highlight>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Highlight>
+      <PathParameters />
     </div>
   );
 }
