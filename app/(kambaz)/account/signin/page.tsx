@@ -25,7 +25,7 @@ export default function Signin() {
       />
       <Link
         id="wd-signin-btn"
-        href="/account/profile"
+        href="/dashboard"
         className="mb-2 block w-full rounded bg-red-500 px-3 py-2 text-center text-white no-underline"
       >
         Sign in
