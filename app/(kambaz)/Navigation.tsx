@@ -4,18 +4,25 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { FaRegCircleUser, FaInbox, FaCircleQuestion } from "react-icons/fa6";
 import { FaBook, FaCalendar } from "react-icons/fa";
 import { ImLab } from "react-icons/im";
+import { IoCalendarOutline } from "react-icons/io5";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "@/app/labs/lab2/tailwind/utilities.css";
 
+// Courses links to /dashboard (there's no /courses page) but is active on /courses
+const LINKS = [
+  { label: "Account", path: "/account", icon: FaRegCircleUser },
+  { label: "Dashboard", path: "/dashboard", icon: AiOutlineDashboard },
+  { label: "Courses", path: "/dashboard", icon: FaBook },
+  { label: "Calendar", path: "/calendar", icon: FaCalendar },
+  { label: "Inbox", path: "/inbox", icon: FaInbox },
+  { label: "Labs", path: "/labs", icon: ImLab },
+  { label: "History", path: "/history", icon: IoCalendarOutline },
+  { label: "Help", path: "/labs", icon: FaCircleQuestion, id: "wd-ai-nav-help" },
+];
+
 export default function KambazNavigation() {
   const pathname = usePathname();
-  const linkClass = (path: string) =>
-    `block py-3 text-center text-sm no-underline ${
-      pathname.startsWith(path)
-        ? "bg-white text-red-600"
-        : "bg-black text-white"
-    }`;
 
   return (
     <nav
@@ -35,70 +42,27 @@ export default function KambazNavigation() {
       alt="Northeastern University logo"
       />
       </Link>
-      <Link
-        href="/account"
-        id="wd-account-link"
-        className={linkClass("/account")}
-      >
-        <FaRegCircleUser className="inline-block text-3xl text-red-600" />
-        <br />
-        Account
-      </Link>
-      <Link
-        href="/dashboard"
-        id="wd-dashboard-link"
-        className={linkClass("/dashboard")}
-      >
-        <AiOutlineDashboard className="inline-block text-3xl text-red-600" />
-        <br />
-        Dashboard
-      </Link>
-
-      <Link
-        href="/dashboard"
-        id="wd-courses-link"
-        className={linkClass("/courses")}
-      >
-        <FaBook className="inline-block text-3xl text-red-600" />
-        <br />
-        Courses
-      </Link>
-      <Link
-        href="/calendar"
-        id="wd-calendar-link"
-        className={linkClass("/calendar")}
-      >
-        <FaCalendar className="inline-block text-3xl text-red-600" />
-        <br />
-        Calendar
-      </Link>
-      <Link
-        href="/inbox"
-        id="wd-inbox-link"
-        className={linkClass("/inbox")}
-      >
-        <FaInbox className="inline-block text-3xl text-red-600" />
-        <br />
-        Inbox
-      </Link>
-      <Link
-        href="/labs"
-        id="wd-labs-link"
-        className={linkClass("/labs")}
-      >
-        <ImLab className="inline-block text-3xl text-red-600" />
-        <br />
-        Labs
-      </Link>
-      <Link
-        href="/labs"
-        id="wd-ai-nav-help"
-        className={linkClass("/labs")}
-      >
-        <FaCircleQuestion className="inline-block text-3xl text-red-600" />
-        <br />
-        Help
-      </Link>
+      {LINKS.map((link) => {
+        const active =
+          link.label === "Courses"
+            ? pathname.includes("/courses")
+            : pathname.includes(link.path);
+        const Icon = link.icon;
+        return (
+          <Link
+            key={link.label}
+            href={link.path}
+            id={link.id ?? `wd-${link.label.toLowerCase()}-link`}
+            className={`block py-3 text-center text-sm no-underline ${
+              active ? "bg-white text-red-600" : "bg-black text-white"
+            }`}
+          >
+            <Icon className="inline-block text-3xl text-red-600" />
+            <br />
+            {link.label}
+          </Link>
+        );
+      })}
       <br />
     </nav>
   );
