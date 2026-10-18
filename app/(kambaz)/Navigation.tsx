@@ -9,9 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "@/app/labs/lab2/tailwind/utilities.css";
 
-// Courses links to /dashboard (there's no /courses page) but is active on /courses
 const LINKS = [
-  { label: "Account", path: "/account", icon: FaRegCircleUser },
   { label: "Dashboard", path: "/dashboard", icon: AiOutlineDashboard },
   { label: "Courses", path: "/dashboard", icon: FaBook },
   { label: "Calendar", path: "/calendar", icon: FaCalendar },
@@ -23,6 +21,7 @@ const LINKS = [
 
 export default function KambazNavigation() {
   const pathname = usePathname();
+  const accountActive = pathname.includes("/account");
 
   return (
     <nav
@@ -41,6 +40,21 @@ export default function KambazNavigation() {
       width="120px"
       alt="Northeastern University logo"
       />
+        <Link
+        href="/account"
+        id="wd-account-link"
+        className={`block py-3 text-center text-sm no-underline ${
+          accountActive ? "bg-white text-red-600" : "bg-black text-white"
+        }`}
+      >
+        <FaRegCircleUser
+          className={`inline-block text-3xl ${
+            accountActive ? "text-red-600" : "text-white"
+          }`}
+        />
+        <br />
+        Account
+      </Link>
       </Link>
       {LINKS.map((link) => {
         const active =
