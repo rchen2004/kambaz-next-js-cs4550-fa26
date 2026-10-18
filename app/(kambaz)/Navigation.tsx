@@ -40,7 +40,8 @@ export default function KambazNavigation() {
       width="120px"
       alt="Northeastern University logo"
       />
-        <Link
+      </Link>
+      <Link
         href="/account"
         id="wd-account-link"
         className={`block py-3 text-center text-sm no-underline ${
@@ -54,7 +55,6 @@ export default function KambazNavigation() {
         />
         <br />
         Account
-      </Link>
       </Link>
       {LINKS.map((link) => {
         const active =
