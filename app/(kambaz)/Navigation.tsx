@@ -8,6 +8,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "@/app/labs/lab2/tailwind/utilities.css";
+import Image from "next/image";
 
 const LINKS = [
   { label: "Dashboard", path: "/dashboard", icon: AiOutlineDashboard },
@@ -34,10 +35,11 @@ export default function KambazNavigation() {
         target="_blank"
         rel="noreferrer"
       >
-      <img
+      <Image
       id="wd-northeastern-logo"
       src="/images/neu.png"
-      width="120px"
+      height="120"
+      width="120"
       alt="Northeastern University logo"
       />
       </Link>
