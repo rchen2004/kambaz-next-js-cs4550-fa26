@@ -8,22 +8,21 @@ export default async function AssignmentEditor({
 }) {
   const {cid, aid} = await params;
   const assignment = db.assignments.find((a) => a._id === aid && a.course === cid);
-  if (!assignment) notFound();
   return (
     <div id="wd-assignments-editor" className="flex max-w-3xl flex-col gap-5">
       <div className="flex flex-col">
         <label htmlFor="wd-name" className="mb-1">Assignment Name</label>
-        <input id="wd-name" defaultValue={assignment.title} className="w-full rounded border border-gray-300 px-3 py-2" />
+        <input id="wd-name" defaultValue={assignment?.title ?? ""} className="w-full rounded border border-gray-300 px-3 py-2" />
       </div>
       <textarea
         id="wd-description"
         rows={10}
-        defaultValue={assignment.description}
+        defaultValue={assignment?.description ?? ""}
         className="w-full rounded border border-gray-300 px-3 py-2 font-sans"
       />
       <div className="flex items-center gap-4">
         <label htmlFor="wd-points" className="w-40 shrink-0 text-right">Points</label>
-        <input id="wd-points" type="number" defaultValue={assignment.points} className="w-full rounded border border-gray-300 px-3 py-2" />
+        <input id="wd-points" type="number" defaultValue={assignment?.points ?? 100} className="w-full rounded border border-gray-300 px-3 py-2" />
       </div>
       <div className="flex items-center gap-4">
         <label htmlFor="wd-group" className="w-40 shrink-0 text-right">Assignment Group</label>
@@ -86,12 +85,12 @@ export default async function AssignmentEditor({
           </div>
           <div>
             <label htmlFor="wd-due-date" className="mb-1 block font-bold">Due</label>
-            <input type="datetime-local" id="wd-due-date" defaultValue={`${assignment.due}T23:59`} className="w-full rounded border border-gray-300 px-3 py-2" />
+            <input type="datetime-local" id="wd-due-date" defaultValue={`${assignment?.due}T23:59`} className="w-full rounded border border-gray-300 px-3 py-2" />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label htmlFor="wd-available-from" className="mb-1 block font-bold">Available from</label>
-              <input type="datetime-local" id="wd-available-from" defaultValue={`${assignment.available}T00:00`} className="w-full rounded border border-gray-300 px-3 py-2" />
+              <input type="datetime-local" id="wd-available-from" defaultValue={`${assignment?.available}T00:00`} className="w-full rounded border border-gray-300 px-3 py-2" />
             </div>
             <div>
               <label htmlFor="wd-available-until" className="mb-1 block font-bold">Until</label>

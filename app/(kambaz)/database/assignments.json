@@ -79,14 +79,5 @@
     "points": 100,
     "due": "2024-05-27",
     "available": "2024-05-20"
-  },
-  {
-    "_id": "A204",
-    "title": "A4",
-    "course": "RS102",
-    "description": "Run a wind tunnel or CFD study of a wing model. Measure the pressure distribution and compare the measured lift coefficient with thin airfoil theory.",
-    "points": 100,
-    "due": "2024-06-03",
-    "available": "2024-05-27"
   }
 ]
