@@ -3,6 +3,8 @@ import "@/app/labs/lab2/tailwind/utilities.css";
 import ClickEvent from "./ClickEvent";
 import PassingDataOnEvent from "./PassingDataOnEvent";
 import PassingFunctions from "./PassingFunctions";
+import CounterBroken from "./CounterBroken";
+import Counter from "./Counter";
 
 const sayHello = (message: string) => {
   alert(message);
@@ -28,6 +30,8 @@ export default function Lab4() {
         nameFunction={sayName}
         theOtherFunction={sample}
       />
+      <CounterBroken />
+      <Counter />
     </div>
   );
 }
