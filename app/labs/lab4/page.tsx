@@ -6,6 +6,7 @@ import PassingFunctions from "./PassingFunctions";
 import CounterBroken from "./CounterBroken";
 import Counter from "./Counter";
 import BooleanStateVariables from "./BooleanStateVariables";
+import StringStateVariables from "./StringStateVariables";
 
 const sayHello = (message: string) => {
   alert(message);
@@ -34,6 +35,7 @@ export default function Lab4() {
       <CounterBroken />
       <Counter />
       <BooleanStateVariables />
+      <StringStateVariables />
     </div>
   );
 }
