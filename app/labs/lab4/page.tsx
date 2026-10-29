@@ -13,6 +13,7 @@ import ArrayStateVariable from "./ArrayStateVariable";
 import ProfileForm from "./profile/ProfileForm";
 import ParentStateComponent from "./ParentStateComponent";
 import PropDrilling from "./PropDrilling";
+import UrlEncoding from "./UrlEncoding";
 
 const sayHello = (message: string) => {
   alert(message);
@@ -48,6 +49,7 @@ export default function Lab4() {
       <ProfileForm />
       <ParentStateComponent />
       <PropDrilling />
+      <UrlEncoding />
     </div>
   );
 }
