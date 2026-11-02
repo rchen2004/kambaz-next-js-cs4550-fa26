@@ -16,6 +16,7 @@ import PropDrilling from "./PropDrilling";
 import UrlEncoding from "./UrlEncoding";
 import ContextExamples from "./context/ContextExamples";
 import ContextProfileForm from "./context/ContextProfileForm";
+import ZustandCounter from "./zustand/ZustandCounter";
 
 const sayHello = (message: string) => {
   alert(message);
@@ -54,6 +55,7 @@ export default function Lab4() {
       <UrlEncoding />
       <ContextExamples />
       <ContextProfileForm />
+      <ZustandCounter />
     </div>
   );
 }
