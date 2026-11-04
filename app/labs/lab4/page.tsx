@@ -18,6 +18,7 @@ import ContextExamples from "./context/ContextExamples";
 import ContextProfileForm from "./context/ContextProfileForm";
 import ZustandExamples from "./zustand/ZustandExamples";
 import ReduxExamples from "./redux/ReduxExamples";
+import Effect from "./Effect";
 
 const sayHello = (message: string) => {
   alert(message);
@@ -58,6 +59,7 @@ export default function Lab4() {
       <ContextProfileForm />
       <ZustandExamples />
       <ReduxExamples />
+      <Effect />
     </div>
   );
 }
