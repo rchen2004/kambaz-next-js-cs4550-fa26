@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
@@ -29,13 +30,13 @@ export default function Assignments() {
           >
             <FaPlus /> Group
           </button>
-          <button
+          <Link
             id="wd-add-assignment"
-            type="button"
-            className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
+            href={`/courses/${cid}/assignments/new`}
+            className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white no-underline"
           >
             <FaPlus /> Assignment
-          </button>
+          </Link>
         </div>
       </div>
       <h3

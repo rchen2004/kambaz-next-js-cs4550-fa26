@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import assignmentsJson from "../database/assignments.json";
 
-export type Assignment = (typeof assignmentsJson)[number];
+export type Assignment = (typeof assignmentsJson)[number] & { until?: string };
 
 type AssignmentsStore = {
   assignments: Assignment[];
