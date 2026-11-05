@@ -39,6 +39,12 @@ export default function Dashboard() {
       </h5>
       <input
         className="mb-2 mt-2 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5"
+        value={course.startDate}
+        onChange={(e) => setCourse({ ...course, startDate: e.target.value })}
+        id="wd-course-start-date"
+      />
+      <input
+        className="mb-2 mt-2 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5"
         value={course.name}
         onChange={(e) => setCourse({ ...course, name: e.target.value })}
         id="wd-course-name"
@@ -51,6 +57,12 @@ export default function Dashboard() {
           setCourse({ ...course, description: e.target.value })
         }
         id="wd-course-description"
+      />
+      <input
+        className="mb-3 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5"
+        value={course.number}
+        onChange={(e) => setCourse({ ...course, number: e.target.value })}
+        id="wd-course-number"
       />
       <hr />
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>

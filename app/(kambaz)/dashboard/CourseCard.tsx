@@ -4,9 +4,10 @@ import { useCoursesStore, type Course } from "../store/coursesStore";
 
 export default function CourseCard({
   course,
+  onEdit,
 }: {
   course: Course;
-  onEdit?: () => void;
+  onEdit: () => void;
 }) {
   const deleteCourse = useCoursesStore((state) => state.deleteCourse);
   return (
@@ -37,8 +38,19 @@ export default function CourseCard({
           </button>
           <button
             type="button"
+            id="wd-edit-course-click"
+            className="ms-2 inline-flex items-center justify-center rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium"
+            onClick={(event) => {
+              event.preventDefault();
+              onEdit();
+            }}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
             id="wd-delete-course-click"
-            className="float-right inline-flex items-center justify-center rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
+            className="ms-2 inline-flex items-center justify-center rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
             onClick={(event) => {
               event.preventDefault();
               deleteCourse(course._id);
