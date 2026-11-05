@@ -1,14 +1,13 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
-import * as db from "../../../database";
+import { useAssignmentsStore } from "../../../store/assignmentsStore";
 
-export default async function Assignments({
-  params,
-}: {
-  params: Promise<{ cid: string }>;
-}) {
-  const { cid } = await params;
-  const assignments = db.assignments.filter(
+export default function Assignments() {
+  const { cid } = useParams<{ cid: string }>();
+  const assignments = useAssignmentsStore((state) => state.assignments).filter(
     (assignment) => assignment.course === cid,
   );
   return (
