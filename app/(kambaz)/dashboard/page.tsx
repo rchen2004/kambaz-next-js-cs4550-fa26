@@ -39,6 +39,7 @@ export default function Dashboard() {
       </h5>
       <input
         className="mb-2 mt-2 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5"
+        type="date"
         value={course.startDate}
         onChange={(e) => setCourse({ ...course, startDate: e.target.value })}
         id="wd-course-start-date"

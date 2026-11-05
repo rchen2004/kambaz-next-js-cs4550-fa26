@@ -1,35 +1,55 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
+import * as db from "../../database";
+import { useAccountContext } from "../AccountContext";
 export default function Signin() {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+  const { setCurrentUser } = useAccountContext();
+  const router = useRouter();
+  const signin = () => {
+    const user = db.users.find(
+      (u) =>
+        u.username === credentials.username &&
+        u.password === credentials.password,
+    );
+    if (!user) return;
+    setCurrentUser(user);
+    router.push("/dashboard");
+  };
   return (
     <div id="wd-signin-screen">
       <h1 className="mb-3 text-2xl font-semibold">Sign In</h1>
       <input
         id="wd-username"
         placeholder="username"
+        value={credentials.username}
+        onChange={(e) =>
+          setCredentials({ ...credentials, username: e.target.value })
+        }
         className="mb-2 w-full rounded border border-neutral-300 px-3 py-2"
       />
       <input
         id="wd-password"
         placeholder="password"
         type="password"
+        value={credentials.password}
+        onChange={(e) =>
+          setCredentials({ ...credentials, password: e.target.value })
+        }
         className="mb-2 w-full rounded border border-neutral-300 px-3 py-2"
       />
-      <label htmlFor="wd-ai-signin-note" className="mb-1 block font-medium">
-        Sample note
-      </label>
-      <input
-        id="wd-ai-signin-note"
-        placeholder="sample note"
-        className="mb-2 w-full rounded border border-neutral-300 px-3 py-2"
-      />
-      <Link
+      <button
         id="wd-signin-btn"
-        href="/dashboard"
+        onClick={signin}
         className="mb-2 block w-full rounded bg-red-500 px-3 py-2 text-center text-white no-underline"
       >
         Sign in
-      </Link>
+      </button>
       <Link 
         id="wd-signup-redirect-btn"  
         href="/account/signup">
