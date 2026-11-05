@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FaFileAlt } from "react-icons/fa";
+import { FaFileAlt, FaTrash } from "react-icons/fa";
+import { useAssignmentsStore } from "../../../store/assignmentsStore";
 
 export default function AssignmentItem({
   cid, aid, title, details,
@@ -9,6 +10,7 @@ export default function AssignmentItem({
   title: string;
   details: string;
 }) {
+  const deleteAssignment = useAssignmentsStore((state) => state.deleteAssignment);
   return (
     <li className="wd-assignment-list-item mb-3 flex gap-3 border border-neutral-300 border-l-[3px] border-l-green-600 bg-white p-3">
       <FaFileAlt className="mt-1 shrink-0 text-xl text-green-700" />
@@ -21,6 +23,18 @@ export default function AssignmentItem({
         </Link>
         <div className="mt-1 text-sm text-neutral-600">{details}</div>
       </div>
+      <button
+        type="button"
+        aria-label={`Delete ${title}`}
+        className="ml-auto self-center text-red-600"
+        onClick={() => {
+          if (window.confirm(`Are you sure you want to remove ${title}?`)) {
+            deleteAssignment(aid);
+          }
+        }}
+      >
+        <FaTrash />
+      </button>
     </li>
   );
 }

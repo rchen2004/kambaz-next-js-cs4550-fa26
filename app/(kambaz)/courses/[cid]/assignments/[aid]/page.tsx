@@ -8,7 +8,8 @@ import { useAssignmentsStore, type Assignment } from "../../../../store/assignme
 export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string; aid: string }>();
   const router = useRouter();
-  const existing = useAssignmentsStore((state) => state.findAssignment(aid));
+  const found = useAssignmentsStore((state) => state.findAssignment(aid));
+  const existing = found?.course === cid ? found : undefined; 
   const addAssignment = useAssignmentsStore((state) => state.addAssignment);
   const updateAssignment = useAssignmentsStore((state) => state.updateAssignment);
   const [assignment, setAssignment] = useState<Assignment>(
