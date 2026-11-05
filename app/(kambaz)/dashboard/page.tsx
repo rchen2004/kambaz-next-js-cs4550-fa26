@@ -1,7 +1,7 @@
 "use client";
 
-import * as db from "../database";
 import { useAccountContext } from "../account/AccountContext";
+import { useEnrollmentsStore } from "../store/enrollmentsStore";
 import { useState } from "react";
 import CourseCard from "./CourseCard";
 import {
@@ -13,9 +13,11 @@ import {
 export default function Dashboard() {
   const courses = useCoursesStore((state) => state.courses);
   const { currentUser } = useAccountContext();
-  const visibleCourses = currentUser
+  const enrollments = useEnrollmentsStore((state) => state.enrollments);
+  const [showAllCourses, setShowAllCourses] = useState(false);
+  const visibleCourses = currentUser && !showAllCourses
     ? courses.filter((c) =>
-        db.enrollments.some(
+        enrollments.some(
           (enrollment) =>
             enrollment.user === currentUser._id && enrollment.course === c._id,
         ),
@@ -27,7 +29,19 @@ export default function Dashboard() {
 
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1>
+      <h1 id="wd-dashboard-title" className="flex items-center justify-between">
+        Dashboard
+        {currentUser && (
+          <button
+            type="button"
+            id="wd-enrollments-toggle"
+            className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
+            onClick={() => setShowAllCourses(!showAllCourses)}
+          >
+            {showAllCourses ? "My Courses" : "Enrollments"}
+          </button>
+        )}
+      </h1>
       <hr />
       <h5 className="flex flex-wrap items-center gap-2">
         New Course
@@ -88,6 +102,7 @@ export default function Dashboard() {
             key={c._id}
             course={c}
             onEdit={() => setCourse(c)}
+            showEnrollment={showAllCourses}
           />
         ))}
       </div>

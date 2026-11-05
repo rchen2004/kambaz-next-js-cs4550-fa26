@@ -1,15 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCoursesStore, type Course } from "../store/coursesStore";
+import { useEnrollmentsStore } from "../store/enrollmentsStore";
+import { useAccountContext } from "../account/AccountContext";
 
 export default function CourseCard({
   course,
   onEdit,
+  showEnrollment,
 }: {
   course: Course;
   onEdit: () => void;
+  showEnrollment: boolean;
 }) {
   const deleteCourse = useCoursesStore((state) => state.deleteCourse);
+  const { currentUser } = useAccountContext();
+  const enroll = useEnrollmentsStore((state) => state.enroll);
+  const unenroll = useEnrollmentsStore((state) => state.unenroll);
+  const enrolled = useEnrollmentsStore((state) =>
+    state.enrollments.some(
+      (e) => e.user === currentUser?._id && e.course === course._id,
+    ),
+  );
   return (
     <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
       <Link
@@ -30,6 +42,8 @@ export default function CourseCard({
           <p className="wd-dashboard-course-description m-0 mb-3 h-[100px] overflow-hidden text-sm text-neutral-600">
             {course.description}
           </p>
+          {!showEnrollment && (
+          <>
           <button
             type="button"
             className="inline-flex items-center justify-center rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
@@ -58,6 +72,27 @@ export default function CourseCard({
           >
             Delete
           </button>
+          </>
+          )}
+          {showEnrollment && currentUser && (
+            <button
+              type="button"
+              id="wd-enroll-course-click"
+              className={`inline-flex items-center justify-center rounded px-3 py-1.5 text-sm font-medium text-white ${
+                enrolled ? "bg-red-600" : "bg-green-600"
+              }`}
+              onClick={(event) => {
+                event.preventDefault(); 
+                if (enrolled) {
+                  unenroll(currentUser._id, course._id);
+                } else {
+                  enroll(currentUser._id, course._id);
+                }
+              }}
+            >
+              {enrolled ? "Unenroll" : "Enroll"}
+            </button>
+          )}
         </div>
       </Link>
     </div>
