@@ -22,7 +22,7 @@ export default function Labs() {
           <Link href="/labs/lab4">Lab 4: Managing Client State</Link>
         </li>
         <li>
-          <Link href="/labs/lab5">Lab 5</Link>
+          <Link href="/labs/lab5">Lab 5: Express REST APIs</Link>
         </li>
         <li>
           <Link id="wd-github" href="https://github.com/rchen2004/kambaz-next-js-cs4550-fa26" target="_blank" rel="noreferrer">GitHub Repository</Link>
