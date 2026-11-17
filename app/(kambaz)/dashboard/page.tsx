@@ -1,31 +1,48 @@
 "use client";
 
 import { useAccountContext } from "../account/AccountContext";
-import { useEnrollmentsStore } from "../store/enrollmentsStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
-import {
-  emptyCourse,
-  useCoursesStore,
-  type Course,
-} from "../store/coursesStore";
+import * as client from "../courses/client";
+import { emptyCourse, type Course } from "../store/coursesStore";
 
 export default function Dashboard() {
-  const courses = useCoursesStore((state) => state.courses);
   const { currentUser } = useAccountContext();
-  const enrollments = useEnrollmentsStore((state) => state.enrollments);
   const [showAllCourses, setShowAllCourses] = useState(false);
-  const visibleCourses = currentUser && !showAllCourses
-    ? courses.filter((c) =>
-        enrollments.some(
-          (enrollment) =>
-            enrollment.user === currentUser._id && enrollment.course === c._id,
-        ),
-      )
-    : courses;
-  const addCourse = useCoursesStore((state) => state.addCourse);
-  const updateCourse = useCoursesStore((state) => state.updateCourse);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [course, setCourse] = useState<Course>(emptyCourse);
+
+  async function loadCourses() {
+    try {
+      const data = !currentUser || showAllCourses
+        ? await client.fetchAllCourses()
+        : await client.findMyCourses();
+      setCourses(data);
+    } catch {
+      setCourses([]);
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- load replaces the empty list
+    void loadCourses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, showAllCourses]);
+
+  async function addCourse() {
+    await client.createCourse(course);
+    await loadCourses();
+  }
+
+  async function updateCourse() {
+    await client.updateCourse(course);
+    await loadCourses();
+  }
+
+  async function deleteCourse(courseId: string) {
+    await client.deleteCourse(courseId);
+    await loadCourses();
+  }
 
   return (
     <div id="wd-dashboard">
@@ -49,7 +66,7 @@ export default function Dashboard() {
           type="button"
           className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
           id="wd-add-new-course-click"
-          onClick={() => addCourse(course)}
+          onClick={addCourse}
         >
           Add
         </button>
@@ -57,7 +74,7 @@ export default function Dashboard() {
           type="button"
           className="rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium"
           id="wd-update-course-click"
-          onClick={() => updateCourse(course)}
+          onClick={updateCourse}
         >
           Update
         </button>
@@ -91,17 +108,18 @@ export default function Dashboard() {
         id="wd-course-number"
       />
       <hr />
-      <h2 id="wd-dashboard-published">Published Courses ({visibleCourses.length})</h2>
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
       <div
         id="wd-dashboard-courses"
         className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
       >
-        {visibleCourses.map((c) => (
+        {courses.map((c) => (
           <CourseCard
             key={c._id}
             course={c}
             onEdit={() => setCourse(c)}
+            onDelete={() => deleteCourse(c._id)}
             showEnrollment={showAllCourses}
           />
         ))}
