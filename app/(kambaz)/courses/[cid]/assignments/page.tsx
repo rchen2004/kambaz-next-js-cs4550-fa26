@@ -1,16 +1,35 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
-import { useAssignmentsStore } from "../../../store/assignmentsStore";
+import { type Assignment } from "../../../store/assignmentsStore";
+import * as client from "../../client";
 
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>();
-  const assignments = useAssignmentsStore((state) => state.assignments).filter(
-    (assignment) => assignment.course === cid,
-  );
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+
+  async function loadAssignments() {
+    try {
+      setAssignments(await client.findAssignmentsForCourse(cid));
+    } catch {
+      setAssignments([]);
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- load replaces the empty list
+    void loadAssignments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cid]);
+
+  async function deleteAssignment(assignmentId: string) {
+    await client.deleteAssignment(assignmentId);
+    await loadAssignments();
+  }
   return (
     <div id="wd-assignments">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -59,6 +78,7 @@ export default function Assignments() {
             aid={assignment._id}
             title={assignment.title}
             details={`Multiple Modules | Not available until ${assignment.available} | Due ${assignment.due} | ${assignment.points} pts`}
+            onDelete={() => deleteAssignment(assignment._id)}
           />
         ))}
       </ul>

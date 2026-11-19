@@ -1,35 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useAssignmentsStore, type Assignment } from "../../../../store/assignmentsStore";
+import { type Assignment } from "../../../../store/assignmentsStore";
+import * as client from "../../../client";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string; aid: string }>();
   const router = useRouter();
-  const found = useAssignmentsStore((state) => state.findAssignment(aid));
-  const existing = found?.course === cid ? found : undefined; 
-  const addAssignment = useAssignmentsStore((state) => state.addAssignment);
-  const updateAssignment = useAssignmentsStore((state) => state.updateAssignment);
-  const [assignment, setAssignment] = useState<Assignment>(
-    existing ?? {
-      _id: "",
-      title: "New Assignment",
-      course: cid,
-      description: "",
-      points: 100,
-      due: "",
-      available: "",
-      until: "",
-    },
-  );
+  const [assignment, setAssignment] = useState<Assignment>({
+    _id: "",
+    title: "New Assignment",
+    course: cid,
+    description: "",
+    points: 100,
+    due: "",
+    available: "",
+    until: "",
+  });
 
-  const save = () => {
-    if (existing) {
-      updateAssignment(assignment);
+  useEffect(() => {
+    const loadAssignment = async () => {
+      const assignments: Assignment[] = await client.findAssignmentsForCourse(cid);
+      const found = assignments.find((a) => a._id === aid);
+      if (found) setAssignment(found);
+    };
+    void loadAssignment();
+  }, [cid, aid]);
+
+  const save = async () => {
+    if (assignment._id) {
+      await client.updateAssignment(assignment);
     } else {
-      addAssignment(assignment); 
+      await client.createAssignmentForCourse(cid, assignment);
     }
     router.push(`/courses/${cid}/assignments`);
   };
