@@ -4,20 +4,25 @@ import { useAccountContext } from "../account/AccountContext";
 import { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 import * as client from "../courses/client";
+import * as enrollmentsClient from "../enrollments/client";
 import { emptyCourse, type Course } from "../store/coursesStore";
 
 export default function Dashboard() {
   const { currentUser } = useAccountContext();
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [courses, setCourses] = useState<Course[]>([]);
+  const [enrolledIds, setEnrolledIds] = useState<string[]>([]);
   const [course, setCourse] = useState<Course>(emptyCourse);
 
   async function loadCourses() {
     try {
-      const data = !currentUser || showAllCourses
-        ? await client.fetchAllCourses()
-        : await client.findMyCourses();
-      setCourses(data);
+      if (!currentUser) {
+        setCourses(await client.fetchAllCourses());
+        return;
+      }
+      const myCourses: Course[] = await client.findMyCourses();
+      setEnrolledIds(myCourses.map((c) => c._id));
+      setCourses(showAllCourses ? await client.fetchAllCourses() : myCourses);
     } catch {
       setCourses([]);
     }
@@ -41,6 +46,16 @@ export default function Dashboard() {
 
   async function deleteCourse(courseId: string) {
     await client.deleteCourse(courseId);
+    await loadCourses();
+  }
+
+  async function toggleEnrollment(courseId: string) {
+    if (!currentUser) return;
+    if (enrolledIds.includes(courseId)) {
+      await enrollmentsClient.unenrollFromCourse(currentUser._id, courseId);
+    } else {
+      await enrollmentsClient.enrollIntoCourse(currentUser._id, courseId);
+    }
     await loadCourses();
   }
 
@@ -120,6 +135,8 @@ export default function Dashboard() {
             course={c}
             onEdit={() => setCourse(c)}
             onDelete={() => deleteCourse(c._id)}
+            enrolled={enrolledIds.includes(c._id)}
+            onToggleEnrollment={() => toggleEnrollment(c._id)}
             showEnrollment={showAllCourses}
           />
         ))}

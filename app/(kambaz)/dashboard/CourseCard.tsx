@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { type Course } from "../store/coursesStore";
-import { useEnrollmentsStore } from "../store/enrollmentsStore";
 import { useAccountContext } from "../account/AccountContext";
 
 export default function CourseCard({
@@ -9,20 +8,17 @@ export default function CourseCard({
   onEdit,
   onDelete,
   showEnrollment,
+  enrolled,
+  onToggleEnrollment,
 }: {
   course: Course;
   onEdit: () => void;
   onDelete: () => void;
   showEnrollment: boolean;
+  enrolled: boolean;
+  onToggleEnrollment: () => void;
 }) {
   const { currentUser } = useAccountContext();
-  const enroll = useEnrollmentsStore((state) => state.enroll);
-  const unenroll = useEnrollmentsStore((state) => state.unenroll);
-  const enrolled = useEnrollmentsStore((state) =>
-    state.enrollments.some(
-      (e) => e.user === currentUser?._id && e.course === course._id,
-    ),
-  );
   return (
     <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
       <Link
@@ -83,12 +79,8 @@ export default function CourseCard({
                 enrolled ? "bg-red-600" : "bg-green-600"
               }`}
               onClick={(event) => {
-                event.preventDefault(); 
-                if (enrolled) {
-                  unenroll(currentUser._id, course._id);
-                } else {
-                  enroll(currentUser._id, course._id);
-                }
+                event.preventDefault();
+                onToggleEnrollment();
               }}
             >
               {enrolled ? "Unenroll" : "Enroll"}
