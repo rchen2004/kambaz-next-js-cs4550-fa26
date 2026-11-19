@@ -5,6 +5,7 @@ const COURSES_API = `${HTTP_SERVER}/api/courses`;
 const USERS_API = `${HTTP_SERVER}/api/users`;
 const MODULES_API = `${HTTP_SERVER}/api/modules`;
 const ASSIGNMENTS_API = `${HTTP_SERVER}/api/assignments`;
+const PEOPLE_API = `${HTTP_SERVER}/api/people`;
 
 export const fetchAllCourses = async () => {
   const { data } = await axios.get(COURSES_API);
@@ -73,3 +74,24 @@ export const deleteAssignment = async (assignmentId: string) => {
   const { data } = await axios.delete(`${ASSIGNMENTS_API}/${assignmentId}`);
   return data;
 }
+
+// people calls use credentials so the server can check the signed-in user's role
+export const findPeopleForCourse = async (courseId: string) => {
+  const { data } = await axiosWithCredentials.get(`${COURSES_API}/${courseId}/people`);
+  return data;
+};
+
+export const createPersonInCourse = async (courseId: string, person: unknown) => {
+  const { data } = await axiosWithCredentials.post(`${COURSES_API}/${courseId}/people`, person);
+  return data;
+};
+
+export const updatePerson = async (person: { _id: string }) => {
+  const { data } = await axiosWithCredentials.put(`${PEOPLE_API}/${person._id}`, person);
+  return data;
+};
+
+export const deletePerson = async (personId: string) => {
+  const { data } = await axiosWithCredentials.delete(`${PEOPLE_API}/${personId}`);
+  return data;
+};
